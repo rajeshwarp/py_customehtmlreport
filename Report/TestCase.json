@@ -1,0 +1,43 @@
+{
+  "suiteName": "Login : Test Loging APIS",
+  "suiteDescription": "validate the responses from Login APIS",
+  "testCases": [
+    {
+      "testId": "Login_01",
+      "testName": "Search repository and store repoName and owner",
+      "testDescription": "Verify the existing repository and store repoName and owner",
+      "testSteps": [
+        {
+          "name": "Search Superuser",
+          "Session": "RestAPIAction",
+          "datasheet": "GET",
+          "Result": "Pass",
+        },
+        {
+          "name": "Search Admin",
+          "Session": "RestAPIAction",
+          "datasheet": "GET",
+          "Result": "Pass"
+        }
+      ]
+      },  {
+      "testId": "Login_02",
+      "testName": "Search repository and store repoName and owner",
+      "testDescription": "Verify the existing repository and store repoName and owner",
+      "testSteps": [
+        {
+          "name": "Search Superuser - non existent",
+          "Session": "RestAPIAction",
+          "datasheet": "GET",
+          "Result": "Pass",
+        },
+        {
+          "name": "Search Admin -non existent",
+          "Session": "RestAPIAction",
+          "datasheet": "GET",
+          "Result": "Pass"
+        }
+      ]
+      }
+  ]
+}

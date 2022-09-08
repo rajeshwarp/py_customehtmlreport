@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title>{{page_title_text}}</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<!--<header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">-->
+<!--    <div class="container-fluid d-flex align-items-center">-->
+<!--        <h1 class="d-flex align-items-center fs-4 text-white mb-0">-->
+<!--            Execution Report-->
+<!--        </h1>-->
+<!--    </div>-->
+<!--</header>-->
+
+<nav class="navbar" style="background-color: #CEE5D0;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="bootstrap-reboot.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+     <h2> Execution Report </h2>
+    </a>
+  </div>
+</nav>
+<div class="mb-3">
+<!--    <div class="container container-sm">-->
+<!--    <h4>Test Execution Results</h4>-->
+<!--    </div>-->
+
+    <div class="card">
+        <div class="card-header">
+            <b>Test Suite:</b> {{suiteName}}</b>
+        </div>
+        <div class="card-body">
+            <h7 class="card-title"><b>Test Suite Description:</b> {{suiteDescription}}</h7>
+            <br>
+            <h7 class="card-title"><b>No. of Tests:</b> {{testCount}}</h7>
+        </div>
+    </div>
+    {% for test in tests %}
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=#{{test.testId}}
+                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    {{test.testId}} | {{test.testName}} | {{test.testDescription}}
+                </button>
+            </h2>
+            <div id={{test.testId}} class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    {% for step in test['testSteps'] %}
+
+                    <table class="table">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Step Name</th>
+                            <th scope="col">Session</th>
+                            <th scope="col">Datasheet</th>
+                            <th scope="col">Result</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr>
+                            <td scope="row">{{loop.index}}</td>
+                            <td>{{(step['name'])}}</td>
+                            <td>{{(step['Session'])}}</td>
+                            <td>{{(step['datasheet'])}}</td>
+                            <!--                            {{(step['Result'])}}-->
+                            <td>
+                                <a class="link-primary" type="button" data-bs-toggle="offcanvas"
+                                   data-bs-target=#{{test.testId}}{{loop.index}} aria-controls="offcanvasRight">
+                                    {{(step['Result'])}}
+
+                                </a>
+                                <!--                                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"-->
+                                <!--                                        data-bs-target=#{{test.testId}}{{loop.index}} aria-controls="offcanvasRight">-->
+                                <!--                                    {{(step['Result'])}}-->
+
+                                <!--                                </button>-->
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id={{test.testId}}{{loop.index}}
+                                     aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 id="offcanvasRightLabel">{{test.testId}} | {{test.testName}} |
+                                            {{test.testDescription}}</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        {{test}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+
+</body>
+</html>
